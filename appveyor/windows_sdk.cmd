@@ -45,6 +45,13 @@ IF %MAJOR_PYTHON_VERSION% == "2" (
     EXIT 1
 )
 
+IF APPVEYOR_REPO_COMMIT_MESSAGE.ToLower().Contains('[docs only]') (
+    SET COMMAND_TO_RUN="echo 1"
+)
+IF APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED.ToLower().Contains('[docs only]') (
+    SET COMMAND_TO_RUN="echo 1"
+)
+
 IF "%PYTHON_ARCH%"=="64" (
     IF %SET_SDK_64% == Y (
         ECHO Configuring Windows SDK %WINDOWS_SDK_VERSION% for Python %MAJOR_PYTHON_VERSION% on a 64 bit architecture
